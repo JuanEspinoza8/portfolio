@@ -1,0 +1,15 @@
+QUIZDAILY+ — capturas REALES con variante de tema (ya cargadas)
+
+App móvil con modo claro/oscuro -> sólo selector Claro/Oscuro (sin PC/Celular).
+Estructura:
+  claro/celular/    -> capturas modo claro   (.jpeg, verticales)
+  oscuro/celular/   -> capturas modo oscuro   (.jpeg, verticales)
+
+Pantallas (mismo nombre en claro y oscuro):
+  01-inicio.jpeg           -> Home / Inicio
+  02-quiz.jpeg             -> Quiz diario (jugando)
+  03-generador-ia.jpeg     -> Generador con IA
+  04-nueva-pregunta.jpeg   -> Crear pregunta (manual)
+  05-banco.jpeg            -> Banco de preguntas
+  06-progreso.jpeg         -> Progreso y estadísticas
+  07-configuracion.jpeg    -> Configuración

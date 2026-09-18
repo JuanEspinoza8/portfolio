@@ -1,0 +1,23 @@
+PES LEAGUE MANAGER V2 — capturas REALES (ya cargadas)
+
+App móvil SOLO modo oscuro -> sin selector de tema.
+Estructura:
+  celular/   -> capturas verticales (.jpeg)
+
+Pantallas:
+  01-hub.jpeg            -> Hub de ligas (lobby)
+  02-crear-torneo.jpeg   -> Crear torneo
+  03-formatos.jpeg       -> Formatos (Liga/Copa/Champions)
+  04-noticias-ia.jpeg    -> Noticias con IA
+  05-resultados.jpeg     -> Resultados
+  06-proximos.jpeg       -> Próximos partidos
+  07-llaves.jpeg         -> Vista de llaves (bracket)
+  08-tabla.jpeg          -> Tabla de posiciones
+  09-rankings.jpeg       -> Rankings (ELO / Champions)
+  10-goleadores.jpeg     -> Goleadores
+  11-stats-equipos.jpeg  -> Stats de equipos
+  12-tienda.jpeg         -> Tienda de sobres (gacha)
+  13-gestion-equipo.jpeg -> Gestión de equipo
+  14-calendario.jpeg     -> Calendario del equipo
+  15-mercado.jpeg        -> Mercado de pases
+  16-acta-ia.jpeg        -> Cargar resultado con IA

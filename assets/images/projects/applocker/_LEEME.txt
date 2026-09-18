@@ -1,0 +1,9 @@
+APPLOCKER — capturas REALES (ya cargadas)
+
+App nativa Android, SOLO modo oscuro -> sin selector de tema.
+Estructura:
+  celular/   -> capturas verticales (.jpeg)
+
+Pantallas:
+  01-inicio.jpeg       -> Inicio y horario de bloqueo
+  02-proteccion.jpeg   -> Estado de protección y reglas

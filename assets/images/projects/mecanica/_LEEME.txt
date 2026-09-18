@@ -1,0 +1,16 @@
+MECÁNICA PISTÓN — capturas REALES con variantes (ya cargadas)
+
+Estructura (tema x dispositivo). El portfolio deja elegir entre estas
+variantes con los botones Claro/Oscuro y PC/Celular en la página de detalle:
+
+  claro/            -> escritorio, modo claro   (.png, apaisadas)
+  claro/celular/    -> celular, modo claro       (.jpeg, verticales)
+  oscuro/           -> escritorio, modo oscuro   (.png, apaisadas)
+  oscuro/celular/   -> celular, modo oscuro       (.jpeg, verticales)
+
+Para AGREGAR una captura nueva:
+  1. Dejá el MISMO nombre de archivo en las 4 carpetas (o al menos en las
+     que correspondan), respetando extensión (.png escritorio / .jpeg celular).
+  2. Agregá una línea en data/projects.js dentro del proyecto 'mecanica',
+     en gallery.desktop y/o gallery.mobile:
+        { file: 'nombre.png',  cap_en: 'Title', cap_es: 'Título' }
