@@ -28,8 +28,25 @@
                     <i data-lucide="moon" id="theme-icon"></i>
                 </button>
                 <div class="socials">
-                    <a href="mailto:juanespinoza.dev8@gmail.com" aria-label="Email"><i
-                            data-lucide="mail"></i></a>
+                    <div class="mail-menu">
+                        <a href="mailto:juanespinoza.dev8@gmail.com" id="mail-toggle" aria-label="Email"
+                            aria-haspopup="true" aria-expanded="false" aria-controls="mail-pop"><i
+                                data-lucide="mail"></i></a>
+                        <div class="mail-pop" id="mail-pop" hidden>
+                            <span class="mail-address">juanespinoza.dev8@gmail.com</span>
+                            <button type="button" class="mail-option" id="mail-copy"><i data-lucide="copy"></i>
+                                <span class="mail-copy-label"><span class="en">Copy address</span><span
+                                        class="es">Copiar correo</span></span>
+                                <span class="mail-copied"><span class="en">Copied!</span><span
+                                        class="es">¡Copiado!</span></span></button>
+                            <a class="mail-option"
+                                href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=juanespinoza.dev8@gmail.com"
+                                target="_blank" rel="noopener"><i data-lucide="external-link"></i>
+                                <span class="en">Write in Gmail</span><span class="es">Escribir en Gmail</span></a>
+                            <a class="mail-option" href="mailto:juanespinoza.dev8@gmail.com"><i data-lucide="mail"></i>
+                                <span class="en">Open mail app</span><span class="es">Abrir app de correo</span></a>
+                        </div>
+                    </div>
                     <a href="https://www.linkedin.com/in/juan-espinoza-997b16281/" aria-label="LinkedIn"
                             target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="24" height="24"
                             fill="currentColor" aria-hidden="true">

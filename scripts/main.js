@@ -58,6 +58,71 @@
     }
   }
 
+  /* ---------------------------- Menú de correo ------------------------- */
+  // Un mailto: solo abre una página en blanco si la PC no tiene app de correo configurada,
+  // así que el ícono abre un menú: copiar la dirección, escribir en Gmail o usar la app de correo.
+
+  function setupMailMenu() {
+    const toggle = document.getElementById('mail-toggle');
+    const pop = document.getElementById('mail-pop');
+    const copyBtn = document.getElementById('mail-copy');
+    if (!toggle || !pop) return;
+
+    const address = toggle.getAttribute('href').replace('mailto:', '');
+
+    function setOpen(open) {
+      pop.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+    }
+
+    toggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      setOpen(pop.hidden);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!pop.hidden && !pop.contains(e.target) && !toggle.contains(e.target)) setOpen(false);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !pop.hidden) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    pop.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(false); });
+    });
+
+    function copyFallback() {
+      const ta = document.createElement('textarea');
+      ta.value = address;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function () {
+        const done = function () {
+          copyBtn.classList.add('is-copied');
+          setTimeout(function () { copyBtn.classList.remove('is-copied'); }, 1800);
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(address).then(done, function () { copyFallback(); done(); });
+        } else {
+          copyFallback();
+          done();
+        }
+      });
+    }
+  }
+
   /* --------------------------- Utilidades ------------------------------ */
 
   function statusLabel(status) {
@@ -425,6 +490,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     setupToggles();
+    setupMailMenu();
 
     const cardsContainer = document.getElementById('projects-list');
     if (cardsContainer) renderProjectCards(cardsContainer);
