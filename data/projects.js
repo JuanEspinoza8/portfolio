@@ -9,6 +9,9 @@
      2. Agregá una entrada en el array "gallery" con el nombre del archivo.
    Mientras el archivo no exista, la web muestra un placeholder con el título,
    así que la página siempre se ve "armada".
+
+   Valores de "status" (se traducen en scripts/main.js → statusLabel):
+     'In use' | 'Beta' | 'In Development' | 'Production'
    ========================================================================== */
 
 window.PROJECTS = [
@@ -19,7 +22,7 @@ window.PROJECTS = [
     title: 'Mecánica Pistón',
     tagline_en: 'Offline-first management system for a mechanical workshop.',
     tagline_es: 'Sistema de gestión offline-first para taller mecánico.',
-    status: 'Production',
+    status: 'In use',
     year: '2026',
     layout: 'web',          // 'web' (landscape) | 'mobile' (portrait)
     accent: '#22d3ee',
@@ -29,40 +32,42 @@ window.PROJECTS = [
       demo: null
     },
     desc_en: [
-      'Management system for a mechanical workshop built as an offline-first PWA with real-time synchronization. It lets you manage clients, vehicles, work orders, spare parts, collections and multimedia files from any device — even with no internet connection.',
-      'The whole app keeps working offline: changes are stored locally with Dexie.js (IndexedDB) and automatically synced to Supabase the moment the connection is back. Installable as a native app on desktop and mobile.'
+      'Management system for a real mechanical workshop, built as an offline-first PWA. It handles clients, vehicles, work orders, spare parts, debts, payments and photos from the shop\'s computer or a phone.',
+      'Offline, you can keep browsing and entering data: changes are stored in IndexedDB (Dexie) and queued. On reconnect, the queue syncs to Supabase in order, with retries and an inbox for errors the server rejects. Debt balances are computed by Postgres triggers and access is protected with Row Level Security.'
     ],
     desc_es: [
-      'Sistema de gestión para taller mecánico construido como una PWA offline-first con sincronización en tiempo real. Permite administrar clientes, vehículos, órdenes de trabajo, repuestos, cobranzas y archivos multimedia desde cualquier dispositivo, incluso sin conexión a internet.',
-      'Toda la app sigue funcionando sin conexión: los cambios se guardan localmente con Dexie.js (IndexedDB) y se sincronizan automáticamente con Supabase apenas vuelve la conexión. Instalable como app nativa en escritorio y móvil.'
+      'Sistema de gestión para un taller mecánico real, construido como PWA offline-first. Administra clientes, vehículos, órdenes de trabajo, repuestos, deudas, pagos y fotos desde la computadora del taller o el celular.',
+      'Sin conexión se puede seguir consultando y cargando datos: los cambios se guardan en IndexedDB (Dexie) y se encolan. Al reconectar, la cola se sincroniza con Supabase en orden, con reintentos y una bandeja para los errores que el servidor rechaza. El saldo de las deudas lo calcula Postgres con triggers y el acceso está protegido con Row Level Security.'
     ],
     features_en: [
       'Client and vehicle management',
       'Work orders with diagnosis, statuses and task checklist',
       'Spare parts loading with automatic cost calculation',
-      'Financial module with real-time account statement',
-      'Photo and PDF document uploads',
+      'Installment debts and payments with receipts; balance computed by Postgres',
+      'Photos and PDFs served through signed URLs',
       'Global search by plate, model, name or phone',
       'Installable as a native app (PWA)',
-      'Works offline with automatic sync on reconnect'
+      'Offline mode with a sync queue, retries and an error inbox',
+      'Tests with Vitest and CI with GitHub Actions'
     ],
     features_es: [
       'Gestión de clientes y vehículos',
       'Órdenes de trabajo con diagnóstico, estados y checklist de tareas',
       'Carga de repuestos con cálculo automático de costos',
-      'Módulo financiero con estado de cuenta en tiempo real',
-      'Upload de fotos y documentos PDF',
+      'Deudas en cuotas y pagos con comprobante; el saldo lo calcula Postgres',
+      'Fotos y PDF servidos con URLs firmadas',
       'Búsqueda global por patente, modelo, nombre o teléfono',
       'Instalable como app nativa (PWA)',
-      'Funciona sin conexión con sincronización automática al reconectar'
+      'Modo offline con cola de sincronización, reintentos y bandeja de errores',
+      'Tests con Vitest y CI con GitHub Actions'
     ],
     tech: [
       { group_en: 'Frontend', group_es: 'Frontend', items: [
         { icon: 'devicon-react-original colored', name: 'React 19' },
-        { icon: 'devicon-vitejs-plain colored', name: 'Vite' },
+        { icon: 'devicon-vitejs-plain colored', name: 'Vite 8' },
         { icon: 'devicon-tailwindcss-original colored', name: 'Tailwind CSS 3' },
-        { icon: 'devicon-react-original colored', name: 'shadcn/ui' },
-        { icon: 'devicon-react-original colored', name: 'React Router v7' }
+        { icon: 'devicon-react-original colored', name: 'React Router v7' },
+        { icon: 'devicon-javascript-plain colored', name: 'Workbox (PWA)' }
       ]},
       { group_en: 'State & Data', group_es: 'Estado y Datos', items: [
         { icon: 'devicon-react-original colored', name: 'TanStack Query' },
@@ -73,7 +78,12 @@ window.PROJECTS = [
       ]},
       { group_en: 'Backend & Cloud', group_es: 'Backend & Cloud', items: [
         { icon: 'devicon-supabase-plain colored', name: 'Supabase' },
-        { icon: 'devicon-postgresql-plain colored', name: 'PostgreSQL' }
+        { icon: 'devicon-postgresql-plain colored', name: 'PostgreSQL' },
+        { icon: 'devicon-netlify-plain colored', name: 'Netlify' }
+      ]},
+      { group_en: 'Testing & CI', group_es: 'Tests y CI', items: [
+        { icon: 'devicon-vitest-plain colored', name: 'Vitest' },
+        { icon: 'devicon-githubactions-plain colored', name: 'GitHub Actions' }
       ]}
     ],
     // Galería con variantes reales: tema (claro/oscuro) x dispositivo (escritorio/celular)
@@ -85,7 +95,6 @@ window.PROJECTS = [
         { file: 'dashboard.png',             cap_en: 'Dashboard',            cap_es: 'Panel principal' },
         { file: 'clientes.png',              cap_en: 'Clients',              cap_es: 'Clientes' },
         { file: 'nuevo-cliente.png',         cap_en: 'New client',           cap_es: 'Nuevo cliente' },
-        { file: 'perfil-cliente.png',        cap_en: 'Client profile',       cap_es: 'Perfil de cliente' },
         { file: 'vehiculos.png',             cap_en: 'Vehicles',             cap_es: 'Vehículos' },
         { file: 'nuevo-vehiculo.png',        cap_en: 'New vehicle',          cap_es: 'Nuevo vehículo' },
         { file: 'perfil-vechiculo.png',      cap_en: 'Vehicle profile',      cap_es: 'Perfil de vehículo' },
@@ -93,8 +102,7 @@ window.PROJECTS = [
         { file: 'ordenes-modo-lista.png',    cap_en: 'Work orders (list)',   cap_es: 'Órdenes (lista)' },
         { file: 'nueva-orden.png',           cap_en: 'New work order',       cap_es: 'Nueva orden' },
         { file: 'orden-detalle.png',         cap_en: 'Work order detail',    cap_es: 'Detalle de orden' },
-        { file: 'registrar-pago.png',        cap_en: 'Register payment',     cap_es: 'Registrar pago' },
-        { file: 'buscador.png',              cap_en: 'Global search',        cap_es: 'Buscador global' }
+        { file: 'registrar-pago.png',        cap_en: 'Register payment',     cap_es: 'Registrar pago' }
       ],
       mobile: [
         { file: 'login.jpeg',                cap_en: 'Login',                cap_es: 'Inicio de sesión' },
@@ -103,7 +111,6 @@ window.PROJECTS = [
         { file: 'stats.jpeg',                cap_en: 'Statistics',           cap_es: 'Estadísticas' },
         { file: 'clientes.jpeg',             cap_en: 'Clients',              cap_es: 'Clientes' },
         { file: 'nuevo-cliente.jpeg',        cap_en: 'New client',           cap_es: 'Nuevo cliente' },
-        { file: 'perfil-cliente.jpeg',       cap_en: 'Client profile',       cap_es: 'Perfil de cliente' },
         { file: 'vehiculos.jpeg',            cap_en: 'Vehicles',             cap_es: 'Vehículos' },
         { file: 'nuevo-vehiculo.jpeg',       cap_en: 'New vehicle',          cap_es: 'Nuevo vehículo' },
         { file: 'perfil-vehiculo-1.jpeg',    cap_en: 'Vehicle profile',      cap_es: 'Perfil de vehículo' },
@@ -112,8 +119,7 @@ window.PROJECTS = [
         { file: 'nueva-orden.jpeg',          cap_en: 'New work order',       cap_es: 'Nueva orden' },
         { file: 'orden-detalle-1.jpeg',      cap_en: 'Work order detail',    cap_es: 'Detalle de orden' },
         { file: 'orden-detalle-2.jpeg',      cap_en: 'Work order detail (2)',cap_es: 'Detalle de orden (2)' },
-        { file: 'orden-detalle-3.jpeg',      cap_en: 'Work order detail (3)',cap_es: 'Detalle de orden (3)' },
-        { file: 'buscador.jpeg',             cap_en: 'Global search',        cap_es: 'Buscador global' }
+        { file: 'orden-detalle-3.jpeg',      cap_en: 'Work order detail (3)',cap_es: 'Detalle de orden (3)' }
       ]
     },
     contributors: [
@@ -129,41 +135,45 @@ window.PROJECTS = [
     title: 'Gestión de Estudio Jurídico',
     tagline_en: 'All-in-one platform to digitalize a law firm.',
     tagline_es: 'Plataforma integral para digitalizar un estudio jurídico.',
-    status: 'Production',
+    status: 'In use',
     year: '2026',
     layout: 'web',
     accent: '#c9a227',
-    cover: 'assets/images/projects/law/oscuro/dashboard.png',
+    cover: 'assets/images/projects/law/oscuro/expediente-detalle.png',
     links: {
       github: 'https://github.com/JuanEspinoza8/gestion-estudio-juridico',
       demo: null
     },
     desc_en: [
-      'Comprehensive system for law firms that digitalizes the daily administration of the office: it centralizes clients, case files, hearing schedules and finances, with a robust blind-payment system and installment plans, accessible from any device.',
-      'Built with an MVC architecture on Node.js and Express, with PostgreSQL / Supabase for the data layer. Secured with JWT and Bcrypt, includes user audit logs and is installable as a native app (PWA) with a responsive mobile design.'
+      'Comprehensive system for law firms that digitalizes the daily administration of the office: it centralizes clients, case files, hearing schedules and finances (fees, installments and payments), accessible from any device. In use by a real law firm; there is no public demo because it holds real client data.',
+      'Layered REST API (routes, models and services) on Node.js and Express 5, with PostgreSQL and Supabase Storage. Input validation with zod, JWT + bcrypt, rate limiting and security headers with helmet (CSP). Automated tests with Jest and Supertest, including integration tests against an in-memory PostgreSQL, and CI on GitHub Actions. Installable as a PWA with a responsive design.'
     ],
     desc_es: [
-      'Sistema integral para estudios de abogados que digitaliza la administración diaria del estudio: centraliza clientes, expedientes, agenda de audiencias y finanzas, con un robusto sistema de pagos ciegos y planes de cuotas, accesible desde cualquier dispositivo.',
-      'Construido con arquitectura MVC sobre Node.js y Express, con PostgreSQL / Supabase en la capa de datos. Protegido con JWT y Bcrypt, incluye logs de auditoría de usuarios y es instalable como app nativa (PWA) con diseño responsivo móvil.'
+      'Sistema integral para estudios de abogados que digitaliza la administración diaria del estudio: centraliza clientes, expedientes, agenda de audiencias y finanzas (honorarios, cuotas y pagos), accesible desde cualquier dispositivo. Está en uso por un estudio jurídico real; no tiene demo pública porque maneja datos reales de clientes.',
+      'API REST en capas (rutas, modelos y servicios) sobre Node.js y Express 5, con PostgreSQL y Supabase Storage. Validación con zod, JWT + bcrypt, rate limiting y cabeceras de seguridad con helmet (CSP). Tests automatizados con Jest y Supertest, con integración contra PostgreSQL en memoria, y CI en GitHub Actions. Instalable como PWA, con diseño responsivo.'
     ],
     features_en: [
       'Analytics dashboard with "money on the street" and debtor ranking',
-      'Financial management with fees, blind payments and automatic deduction',
-      'Automatic installment plans based on income',
-      'Client–case file relation and PDF evidence upload module',
-      'Interactive hearings calendar and procedural deadlines',
-      'Quick notes system per case file',
-      'Secure authentication (JWT, Bcrypt) and user audit logs',
+      'Fee and payment management with automatic balance deduction',
+      'Fees split into installments with progress tracking',
+      'Client–case file relation and PDF document uploads',
+      'PDFs opened through short-lived signed URLs',
+      'Interactive hearings calendar and procedural deadlines, with email reminders',
+      'Per-client notes with due dates and personal quick notes',
+      'Secure authentication (JWT, bcrypt), rate limiting and user audit logs',
+      'Automated tests and CI',
       'Installable as a native app (PWA) with responsive mobile design'
     ],
     features_es: [
       'Dashboard analítico con capital "en la calle" y ranking de deudores',
-      'Gestión financiera con honorarios, pagos ciegos y deducción automática',
-      'Planes de cuotas automáticos según ingresos',
-      'Relación cliente-expediente y módulo de subida de documentos PDF',
-      'Agenda interactiva de audiencias y vencimientos procesales',
-      'Sistema de notas rápidas por expediente',
-      'Autenticación segura (JWT, Bcrypt) y logs de auditoría de usuarios',
+      'Gestión de honorarios y pagos con descuento automático del saldo',
+      'Honorarios en cuotas con seguimiento de la cuota en curso',
+      'Relación cliente-expediente y carga de documentos PDF',
+      'PDFs abiertos con URLs firmadas de corta duración',
+      'Agenda interactiva de audiencias y vencimientos procesales, con recordatorios por email',
+      'Notas por cliente con vencimiento y notas rápidas personales',
+      'Autenticación segura (JWT, bcrypt), rate limiting y logs de auditoría de usuarios',
+      'Tests automatizados y CI',
       'Instalable como app nativa (PWA) con diseño responsivo móvil'
     ],
     tech: [
@@ -175,13 +185,18 @@ window.PROJECTS = [
       ]},
       { group_en: 'Backend', group_es: 'Backend', items: [
         { icon: 'devicon-nodejs-plain colored', name: 'Node.js' },
-        { icon: 'devicon-express-original', name: 'Express.js', mono: true },
-        { icon: 'devicon-javascript-plain colored', name: 'Multer' },
-        { icon: 'devicon-jest-plain colored', name: 'JWT + Bcrypt' }
+        { icon: 'devicon-express-original', name: 'Express 5', mono: true },
+        { icon: 'devicon-javascript-plain colored', name: 'zod' },
+        { icon: 'devicon-javascript-plain colored', name: 'JWT + bcrypt' },
+        { icon: 'devicon-javascript-plain colored', name: 'Multer' }
       ]},
       { group_en: 'Database & Cloud', group_es: 'Base de Datos & Cloud', items: [
         { icon: 'devicon-supabase-plain colored', name: 'Supabase' },
         { icon: 'devicon-postgresql-plain colored', name: 'PostgreSQL' }
+      ]},
+      { group_en: 'Testing & CI', group_es: 'Tests y CI', items: [
+        { icon: 'devicon-jest-plain colored', name: 'Jest + Supertest' },
+        { icon: 'devicon-githubactions-plain colored', name: 'GitHub Actions' }
       ]}
     ],
     // Galería con variantes reales: tema (claro/oscuro) x dispositivo (escritorio/celular)
@@ -189,7 +204,6 @@ window.PROJECTS = [
     gallery: {
       desktop: [
         { file: 'login.png',                 cap_en: 'Login',                cap_es: 'Inicio de sesión' },
-        { file: 'dashboard.png',             cap_en: 'Analytics dashboard',  cap_es: 'Dashboard analítico' },
         { file: 'clientes.png',              cap_en: 'Clients',              cap_es: 'Clientes' },
         { file: 'nuevo-cliente.png',         cap_en: 'New client',           cap_es: 'Nuevo cliente' },
         { file: 'detalle-cliente.png',       cap_en: 'Client detail',        cap_es: 'Detalle de cliente' },
@@ -202,7 +216,6 @@ window.PROJECTS = [
       ],
       mobile: [
         { file: 'login.jpeg',                cap_en: 'Login',                cap_es: 'Inicio de sesión' },
-        { file: 'dashboard.jpeg',            cap_en: 'Analytics dashboard',  cap_es: 'Dashboard analítico' },
         { file: 'clientes.jpeg',             cap_en: 'Clients',              cap_es: 'Clientes' },
         { file: 'cliente-detalle.jpeg',      cap_en: 'Client detail',        cap_es: 'Detalle de cliente' },
         { file: 'expedientes.jpeg',          cap_en: 'Case files',           cap_es: 'Expedientes' },
@@ -220,12 +233,191 @@ window.PROJECTS = [
 
   /* ------------------------------------------------------------------ */
   {
+    slug: 'snapit',
+    title: 'SnapIt',
+    tagline_en: 'Citizen reports on public spaces, with verification and prioritization.',
+    tagline_es: 'Reportes ciudadanos sobre la vía pública, con verificación y priorización.',
+    status: 'In Development',
+    year: '2026',
+    layout: 'web',
+    accent: '#14b8a6',
+    cover: 'assets/images/projects/snapit/escritorio/01-mapa.jpeg',
+    links: {
+      github: 'https://github.com/JuanEspinoza8/SNAPIT',
+      demo: null
+    },
+    desc_en: [
+      'Final project of the University Technician degree in Web Development (UNCo, 2026), built by a team of three. Neighbors report problems on public spaces (potholes, broken sidewalks, curbs without ramps, streetlights out) with a photo and their location; operators of each municipal area verify the reports, group them into incidents, prioritize them and track their progress.',
+      'Monorepo with three parts: a REST API in Express + TypeScript + Prisma over PostgreSQL with PostGIS and pgRouting, a React web panel and a Flutter mobile app. Each report gets a trust score (photo metadata, location, the neighbor\'s reputation), priorities are recalculated every day, Claude (Anthropic API) helps classify photos, and the pedestrian network is imported from OpenStreetMap as the base for accessible walking routes. Every layer has its own CI job on GitHub Actions. Still in development.'
+    ],
+    desc_es: [
+      'Trabajo final de la Tecnicatura Universitaria en Desarrollo Web (UNCo, 2026), hecho en un equipo de tres. Los vecinos reportan problemas de la vía pública (pozos, veredas rotas, cordones sin rampa, luminarias apagadas) con una foto y su ubicación; los operadores de cada área municipal verifican los reportes, los agrupan en incidentes, los priorizan y siguen su avance.',
+      'Monorepo con tres partes: una API REST en Express + TypeScript + Prisma sobre PostgreSQL con PostGIS y pgRouting, un panel web en React y una app móvil en Flutter. Cada reporte tiene un nivel de confianza (metadatos de la foto, ubicación, reputación del vecino), la prioridad se recalcula todos los días, Claude (API de Anthropic) ayuda a clasificar las fotos y la red peatonal se importa de OpenStreetMap como base para los recorridos accesibles. Cada capa tiene su propio trabajo de CI en GitHub Actions. En desarrollo.'
+    ],
+    features_en: [
+      'Report with photo, category, severity and location (web and mobile app)',
+      'Public map of incidents with filters by category, status and date',
+      'Trust score for each report: photo metadata, location and neighbor reputation',
+      'Review queue for operators, with AI-assisted processing (Claude)',
+      'Incident workflow in the API: forward to an area, track progress, comment and recategorize',
+      'Daily priority recalculation',
+      'Roles: neighbor, operator and administrator; administrators create operator accounts',
+      'Email confirmation and password recovery',
+      'Points of interest and pedestrian network imported from OpenStreetMap',
+      'Tests against a real PostGIS database and CI for the API, web and app'
+    ],
+    features_es: [
+      'Reporte con foto, categoría, gravedad y ubicación (web y app móvil)',
+      'Mapa público de incidentes con filtros por categoría, estado y fecha',
+      'Nivel de confianza de cada reporte: metadatos de la foto, ubicación y reputación del vecino',
+      'Bandeja de revisión para operadores, con procesamiento asistido por IA (Claude)',
+      'Gestión de incidentes en la API: derivar a un área, registrar el avance, comentar y recategorizar',
+      'Recálculo diario de la prioridad',
+      'Roles de vecino, operador y administrador; el administrador da de alta a los operadores',
+      'Confirmación de correo y recuperación de clave',
+      'Puntos de interés y red peatonal importados de OpenStreetMap',
+      'Tests contra PostGIS real y CI para la API, la web y la app'
+    ],
+    tech: [
+      { group_en: 'Backend', group_es: 'Backend', items: [
+        { icon: 'devicon-nodejs-plain colored', name: 'Node.js' },
+        { icon: 'devicon-express-original', name: 'Express', mono: true },
+        { icon: 'devicon-typescript-plain colored', name: 'TypeScript' },
+        { icon: 'devicon-prisma-original', name: 'Prisma', mono: true },
+        { icon: 'devicon-javascript-plain colored', name: 'JWT' }
+      ]},
+      { group_en: 'Database & GIS', group_es: 'Base de Datos y GIS', items: [
+        { icon: 'devicon-postgresql-plain colored', name: 'PostgreSQL' },
+        { icon: 'devicon-postgresql-plain colored', name: 'PostGIS + pgRouting' },
+        { icon: 'devicon-javascript-plain colored', name: 'OpenStreetMap' }
+      ]},
+      { group_en: 'Web', group_es: 'Web', items: [
+        { icon: 'devicon-react-original colored', name: 'React 19' },
+        { icon: 'devicon-vitejs-plain colored', name: 'Vite' },
+        { icon: 'devicon-tailwindcss-original colored', name: 'Tailwind CSS 4' },
+        { icon: 'devicon-react-original colored', name: 'TanStack Query' },
+        { icon: 'devicon-javascript-plain colored', name: 'Leaflet' }
+      ]},
+      { group_en: 'Mobile', group_es: 'Mobile', items: [
+        { icon: 'devicon-flutter-plain colored', name: 'Flutter' },
+        { icon: 'devicon-flutter-plain colored', name: 'Riverpod' },
+        { icon: 'devicon-flutter-plain colored', name: 'flutter_map' }
+      ]},
+      { group_en: 'AI & Tooling', group_es: 'IA y Herramientas', items: [
+        { icon: 'devicon-claude-plain colored', name: 'Claude (Anthropic API)' },
+        { icon: 'devicon-docker-plain colored', name: 'Docker' },
+        { icon: 'devicon-vitest-plain colored', name: 'Vitest' },
+        { icon: 'devicon-githubactions-plain colored', name: 'GitHub Actions' }
+      ]}
+    ],
+    // Panel web, sin modo oscuro: galería simple. Capturas con el servidor simulado del panel (MSW).
+    gallery: [
+      { img: 'escritorio/01-mapa.jpeg',              cap_en: 'Public incident map',       cap_es: 'Mapa público de incidentes' },
+      { img: 'escritorio/02-reportar.jpeg',          cap_en: 'Report a problem',          cap_es: 'Reportar un problema' },
+      { img: 'escritorio/03-mis-reportes.jpeg',      cap_en: 'My reports',                cap_es: 'Mis reportes' },
+      { img: 'escritorio/04-revision.jpeg',          cap_en: 'Operator review queue',     cap_es: 'Revisión de reportes' },
+      { img: 'escritorio/05-revisar-reporte.jpeg',   cap_en: 'Reviewing a report',        cap_es: 'Revisar un reporte' },
+      { img: 'escritorio/06-administracion.jpeg',    cap_en: 'Operator accounts',         cap_es: 'Alta de operadores' }
+    ],
+    contributors: [
+      { name: 'Juan Espinoza',    role_en: 'Full Stack Developer', role_es: 'Desarrollador Full Stack', github: 'JuanEspinoza8' },
+      { name: 'Ezequiel Retamal', role_en: 'Backend & Web',        role_es: 'Backend y Web',            github: 'ezequiel95jr' },
+      { name: 'Lautaro',          role_en: 'Frontend Developer',   role_es: 'Desarrollador Frontend',   github: 'LautyM22' }
+    ]
+  },
+
+  /* ------------------------------------------------------------------ */
+  {
+    slug: 'eett',
+    freelance: true,
+    title: 'Gestión EETT',
+    tagline_en: 'Maintenance and operations app for electrical transformer substations.',
+    tagline_es: 'App de mantenimiento y operación para estaciones transformadoras eléctricas.',
+    status: 'In Development',
+    year: '2026',
+    layout: 'mobile',
+    accent: '#34d399',
+    cover: 'assets/images/projects/eett/oscuro/celular/01-inicio.jpeg',
+    links: {
+      // Repo privado: es un trabajo para una empresa.
+      github: null,
+      demo: null
+    },
+    desc_en: [
+      'App for the maintenance and operations area of a power transmission company, to manage its transformer substations: monthly inspection routines, alerts, switching operations, tasks, equipment and predictive maintenance, in one place instead of paper forms and spreadsheets.',
+      'A single Flutter app with two targets: an Android APK for field work at the substation and the same app in the browser for the office. It is currently an interface demo with sample data and no server, used to validate every screen with the team before building the backend. Built with Riverpod and go_router, with light and dark themes and a design system whose AA contrast is checked by tests, and CI that runs analysis and tests and builds the web version and the APK. The screenshots blur the identifiers of real substations.'
+    ],
+    desc_es: [
+      'App para el área de mantenimiento y operación de una empresa de transporte de energía eléctrica, para gestionar sus estaciones transformadoras: rutinas de inspección mensuales, alertas, maniobras, tareas, equipos y mantenimiento predictivo, en un solo lugar en vez de planillas de papel y Excel.',
+      'Una sola app Flutter con dos salidas: el APK para Android, para el trabajo en la estación, y la misma app en el navegador de la PC. Hoy es una demo de interfaz con datos de ejemplo y sin servidor, para validar cada pantalla con el equipo antes de construir el backend. Hecha con Riverpod y go_router, con modo claro y oscuro, un sistema de diseño cuyo contraste AA verifican los tests, y CI que corre el análisis y los tests y compila la versión web y el APK. En las capturas están difuminados los identificadores de las estaciones reales.'
+    ],
+    features_en: [
+      'Monthly inspection routine on the phone, field by field, with last month\'s values alongside',
+      'Out-of-range readings flagged on the spot',
+      'Alerts board with configurable columns, plus list and by-station views',
+      'Weekly schedule of switching operations',
+      'Tasks linked to alerts and operations',
+      'Equipment, history and predictive maintenance test schedule',
+      'Training tutorials with text, images and video',
+      'Reports screen to export routines, alerts and tasks (PDF / Excel)',
+      'Roles: technician, supervisor and administrator',
+      'Light and dark themes'
+    ],
+    features_es: [
+      'Rutina de inspección mensual en el celular, campo por campo, con los valores del mes anterior al lado',
+      'Lecturas fuera de lo normal marcadas en el momento',
+      'Tablero de alertas con columnas configurables, y vistas de lista y por estación',
+      'Agenda semanal de maniobras',
+      'Tareas vinculadas a alertas y maniobras',
+      'Equipos, historial y cronograma de ensayos de mantenimiento predictivo',
+      'Tutoriales de capacitación con texto, imágenes y video',
+      'Pantalla de informes para bajar rutinas, alertas y tareas (PDF / Excel)',
+      'Roles de técnico, supervisor y administrador',
+      'Modo claro y oscuro'
+    ],
+    tech: [
+      { group_en: 'Mobile & Web', group_es: 'Mobile y Web', items: [
+        { icon: 'devicon-flutter-plain colored', name: 'Flutter' },
+        { icon: 'devicon-dart-plain colored', name: 'Dart' },
+        { icon: 'devicon-materialui-plain colored', name: 'Material 3' }
+      ]},
+      { group_en: 'State & Navigation', group_es: 'Estado y Navegación', items: [
+        { icon: 'devicon-flutter-plain colored', name: 'Riverpod' },
+        { icon: 'devicon-flutter-plain colored', name: 'go_router' },
+        { icon: 'devicon-flutter-plain colored', name: 'fl_chart' },
+        { icon: 'devicon-flutter-plain colored', name: 'video_player' }
+      ]},
+      { group_en: 'Quality', group_es: 'Calidad', items: [
+        { icon: 'devicon-flutter-plain colored', name: 'flutter_test' },
+        { icon: 'devicon-githubactions-plain colored', name: 'GitHub Actions' }
+      ]}
+    ],
+    // Galería con variante de tema (claro/oscuro). App móvil: sin selector de dispositivo.
+    galleryModes: true,
+    gallery: {
+      mobile: [
+        { file: '01-inicio.jpeg',         cap_en: 'Home',                 cap_es: 'Inicio' },
+        { file: '02-carga-rutina.jpeg',   cap_en: 'Routine data entry',   cap_es: 'Carga de la rutina' },
+        { file: '03-alertas.jpeg',        cap_en: 'Alerts board',         cap_es: 'Tablero de alertas' },
+        { file: '04-alerta.jpeg',         cap_en: 'Alert detail',         cap_es: 'Ficha de alerta' },
+        { file: '05-maniobras.jpeg',      cap_en: 'Switching operations', cap_es: 'Maniobras' },
+        { file: '06-tareas.jpeg',         cap_en: 'Tasks',                cap_es: 'Tareas' },
+        { file: '07-capacitacion.jpeg',   cap_en: 'Training tutorial',    cap_es: 'Tutorial de capacitación' }
+      ]
+    },
+    contributors: [
+      { name: 'Juan Espinoza', role_en: 'Developer', role_es: 'Desarrollador', github: 'JuanEspinoza8' }
+    ]
+  },
+
+  /* ------------------------------------------------------------------ */
+  {
     slug: 'otto',
     freelance: true,
     title: 'Otto — Gestor Financiero',
     tagline_en: 'Private, offline-first personal finance manager.',
     tagline_es: 'Gestor de finanzas personales privado y offline-first.',
-    status: 'Production',
+    status: 'In use',
     year: '2026',
     layout: 'mobile',
     accent: '#22c55e',
@@ -235,33 +427,35 @@ window.PROJECTS = [
       demo: null
     },
     desc_en: [
-      'Cross-platform personal finance manager with a 100% offline-first, privacy-focused architecture: your data never leaves the device. Track income and expenses by category, set budgets and monthly goals, and understand your money at a glance from the dashboard.',
-      'Built with Flutter and Riverpod over a relational SQLite database, with charts (fl_chart), biometric lock (fingerprint / face), a blur privacy screen when the app goes to background, and JSON backup export/import. Its mascot "Otto" makes saving feel friendly.'
+      'Cross-platform personal finance manager with an offline-first, privacy-focused architecture: your financial data is stored only on the device, with no accounts or cloud sync. Track income and expenses by category, set budgets and monthly goals, and understand your money at a glance from the dashboard.',
+      'Built with Flutter and Riverpod over a relational SQLite database, with charts (fl_chart), biometric lock (fingerprint / face), a blur privacy screen when the app goes to background, and JSON backup export/import. An AI assistant turns a typed sentence into transactions: only that sentence and your category names are sent to the AI service. Its mascot "Otto" makes saving feel friendly.'
     ],
     desc_es: [
-      'Gestor de finanzas personales multiplataforma con una arquitectura 100% offline-first y enfocada en la privacidad: tus datos nunca salen del dispositivo. Registra ingresos y gastos por categoría, define presupuestos y metas mensuales, y entiende tu plata de un vistazo desde el panel de control.',
-      'Construido con Flutter y Riverpod sobre una base de datos relacional SQLite, con gráficos (fl_chart), bloqueo biométrico (huella / rostro), pantalla de privacidad con desenfoque al pasar a segundo plano, y exportación/importación de backups en JSON. Su mascota "Otto" hace del ahorro algo más amigable.'
+      'Gestor de finanzas personales multiplataforma con una arquitectura offline-first y enfocada en la privacidad: tus datos financieros se guardan solo en el dispositivo, sin cuentas ni sincronización en la nube. Registra ingresos y gastos por categoría, define presupuestos y metas mensuales, y entiende tu plata de un vistazo desde el panel de control.',
+      'Construido con Flutter y Riverpod sobre una base de datos relacional SQLite, con gráficos (fl_chart), bloqueo biométrico (huella / rostro), pantalla de privacidad con desenfoque al pasar a segundo plano, y exportación/importación de backups en JSON. Un asistente con IA convierte una frase escrita en movimientos: solo se envían esa frase y los nombres de tus categorías al servicio de IA. Su mascota "Otto" hace del ahorro algo más amigable.'
     ],
     features_en: [
       'Dashboard with dynamic balance, donut chart and recent history',
       'Income/expense transactions with full CRUD',
       'Categories with icon, color and budget limits',
-      'Real-time budget alerts (yellow at 80%, red at 100%)',
+      'Budget alerts (yellow at 80%, red at 100%)',
       'Recurring transactions module',
       'Savings goals with the "Otto" mascot',
+      'AI assistant that turns a typed sentence into transactions',
       'Biometric lock + blur privacy screen in background',
-      'JSON backup export/import (100% local, no cloud)',
+      'JSON backup export/import (stored locally, no cloud)',
       'Light/Dark theme and local notifications'
     ],
     features_es: [
       'Panel con balance dinámico, gráfico de dona e historial reciente',
       'Movimientos de ingreso/gasto con CRUD completo',
       'Categorías con ícono, color y límites de presupuesto',
-      'Alertas de presupuesto en tiempo real (amarillo 80%, rojo 100%)',
+      'Alertas de presupuesto (amarillo 80%, rojo 100%)',
       'Módulo de movimientos recurrentes',
       'Metas de ahorro con la mascota "Otto"',
+      'Asistente con IA que convierte una frase escrita en movimientos',
       'Bloqueo biométrico + pantalla de privacidad al minimizar',
-      'Exportación/importación de backups en JSON (100% local, sin nube)',
+      'Exportación/importación de backups en JSON (guardados en el dispositivo, sin nube)',
       'Tema Claro/Oscuro y notificaciones locales'
     ],
     tech: [
@@ -275,10 +469,11 @@ window.PROJECTS = [
         { icon: 'devicon-sqlite-plain colored', name: 'SQLite (sqflite)' },
         { icon: 'devicon-flutter-plain colored', name: 'fl_chart' }
       ]},
-      { group_en: 'Device & Security', group_es: 'Dispositivo y Seguridad', items: [
+      { group_en: 'Device, Security & AI', group_es: 'Dispositivo, Seguridad e IA', items: [
         { icon: 'devicon-android-plain colored', name: 'local_auth (Biometría)' },
         { icon: 'devicon-android-plain colored', name: 'Local Notifications' },
-        { icon: 'devicon-flutter-plain colored', name: 'share_plus / file_picker' }
+        { icon: 'devicon-flutter-plain colored', name: 'share_plus / file_picker' },
+        { icon: 'devicon-flutter-plain colored', name: 'Pollinations AI (http)' }
       ]}
     ],
     // Galería con variante de tema (claro/oscuro). App móvil: sin selector de dispositivo.
@@ -298,7 +493,7 @@ window.PROJECTS = [
       ]
     },
     contributors: [
-      { name: 'Juan Espinoza', role_en: 'Lead Developer', role_es: 'Lead Developer', github: 'JuanEspinoza8' }
+      { name: 'Juan Espinoza', role_en: 'Freelance Developer', role_es: 'Freelance Developer', github: 'JuanEspinoza8' }
     ]
   },
 
@@ -309,7 +504,7 @@ window.PROJECTS = [
     title: 'QuizDaily+',
     tagline_en: 'Daily microlearning app with AI-generated quizzes.',
     tagline_es: 'App de microaprendizaje diario con quizzes generados por IA.',
-    status: 'Production',
+    status: 'In use',
     year: '2025',
     layout: 'mobile',
     accent: '#7c6df2',
@@ -319,30 +514,36 @@ window.PROJECTS = [
       demo: null
     },
     desc_en: [
-      'Daily microlearning educational app: study any topic through daily reviews. Create quizzes manually, import them, or generate them automatically using Artificial Intelligence, then track your progress and reach your learning goals.',
-      'Built with Flutter and an ultra-fast Hive NoSQL local database (works 100% offline), integrating Google Gemini AI for automatic question generation, local notifications for study reminders, and charts to visualize your progress.'
+      'Daily microlearning app: study any topic through short daily reviews. Create questions by hand or generate them with AI from a text, a PDF or an image, edit them before saving, and keep your streak and daily goal.',
+      'Built with Flutter and Hive for local storage: it works offline, except for the AI generator, which uses Google Gemini and validates its responses. Repository layer shared through Provider, study reminders scheduled in the local time zone, JSON backup and restore, and unit and widget tests.'
     ],
     desc_es: [
-      'App educativa de microaprendizaje diario: estudia cualquier tema mediante repasos diarios. Crea cuestionarios manualmente, impórtalos o genéralos automáticamente usando Inteligencia Artificial, y haz un seguimiento de tu progreso para alcanzar tus metas de aprendizaje.',
-      'Construido con Flutter y una base de datos local Hive NoSQL ultra-rápida (funciona 100% offline), integrando Google Gemini AI para la generación automática de preguntas, notificaciones locales para recordar tus repasos, y gráficos para visualizar tu progreso.'
+      'App de microaprendizaje diario: estudiá cualquier tema con repasos cortos todos los días. Creá preguntas a mano o generalas con IA a partir de un texto, un PDF o una imagen, editalas antes de guardarlas y mantené tu racha y tu meta diaria.',
+      'Construida con Flutter y Hive como almacenamiento local: funciona sin conexión, salvo el generador con IA, que usa Google Gemini y valida sus respuestas. Capa de repositorios compartida con Provider, recordatorios programados en la zona horaria local, respaldo y restauración en JSON, y tests unitarios y de widgets.'
     ],
     features_en: [
-      'Automatic question generation with AI (Google Gemini)',
-      'Manual creation and import of question banks',
-      'Daily quizzes to keep the study habit',
-      'Local notifications to remember your learning sessions',
+      'AI question generation (Google Gemini) from text, PDF or image',
+      'Edit generated questions before saving them',
+      'Daily quiz with streak and daily goal',
+      'Smart review: questions you miss come back more often',
+      'Exam mode by subject and date',
+      'Scheduled study reminders',
       'Charts and statistics to track your progress',
-      'Daily study goals',
-      'Ultra-fast local database (works 100% offline)'
+      'JSON backup and restore',
+      'Delete questions with undo',
+      'Light and dark mode'
     ],
     features_es: [
-      'Generación automática de preguntas con IA (Google Gemini)',
-      'Creación manual e importación de bancos de preguntas',
-      'Quizzes diarios para mantener el hábito de estudio',
-      'Notificaciones locales para recordar tus sesiones de aprendizaje',
-      'Gráficos y estadísticas para el seguimiento de tu progreso',
-      'Establecimiento de metas de estudio diarias',
-      'Base de datos local ultra-rápida (funciona 100% offline)'
+      'Generación de preguntas con IA (Google Gemini) desde texto, PDF o imagen',
+      'Edición de las preguntas generadas antes de guardarlas',
+      'Quiz diario con racha y meta diaria',
+      'Repaso inteligente: las preguntas que fallás salen más seguido',
+      'Modo examen por materia y fecha',
+      'Recordatorios de estudio programados',
+      'Gráficos y estadísticas para seguir tu progreso',
+      'Respaldo y restauración en JSON',
+      'Borrado de preguntas con "Deshacer"',
+      'Modo claro y oscuro'
     ],
     tech: [
       { group_en: 'Mobile', group_es: 'Mobile', items: [
@@ -352,6 +553,7 @@ window.PROJECTS = [
         { icon: 'devicon-flutter-plain colored', name: 'fl_chart' }
       ]},
       { group_en: 'State & Data', group_es: 'Estado y Datos', items: [
+        { icon: 'devicon-flutter-plain colored', name: 'Provider' },
         { icon: 'devicon-flutter-plain colored', name: 'Hive NoSQL' },
         { icon: 'devicon-flutter-plain colored', name: 'File Picker' },
         { icon: 'devicon-flutter-plain colored', name: 'Image Picker' },
@@ -359,7 +561,10 @@ window.PROJECTS = [
       ]},
       { group_en: 'AI & Services', group_es: 'IA & Servicios', items: [
         { icon: 'devicon-google-plain colored', name: 'Google Gemini AI' },
-        { icon: 'devicon-android-plain colored', name: 'Local Notifications' }
+        { icon: 'devicon-android-plain colored', name: 'flutter_local_notifications + timezone' }
+      ]},
+      { group_en: 'Testing', group_es: 'Tests', items: [
+        { icon: 'devicon-flutter-plain colored', name: 'flutter_test' }
       ]}
     ],
     // Galería con variante de tema (claro/oscuro). App móvil: sin selector de dispositivo.
@@ -376,7 +581,7 @@ window.PROJECTS = [
       ]
     },
     contributors: [
-      { name: 'Juan Espinoza', role_en: 'Lead Developer', role_es: 'Lead Developer', github: 'JuanEspinoza8' }
+      { name: 'Juan Espinoza', role_en: 'Freelance Developer', role_es: 'Freelance Developer', github: 'JuanEspinoza8' }
     ]
   },
 
@@ -386,13 +591,14 @@ window.PROJECTS = [
     title: 'PES League Manager V2',
     tagline_en: 'Manage your own multiplayer Master League with friends.',
     tagline_es: 'Gestioná tu propia Master League multijugador con amigos.',
-    status: 'Production',
+    status: 'Beta',
     year: '2026',
     layout: 'mobile',
     accent: '#e0b64c',
     cover: 'assets/images/projects/pes/celular/01-hub.jpeg',
     links: {
-      github: 'https://github.com/JuanEspinoza8/pes_league_manager_v2',
+      // El repo está privado por ahora: sin link para no mostrar un 404.
+      github: null,
       demo: null
     },
     desc_en: [
@@ -413,7 +619,8 @@ window.PROJECTS = [
       'League dashboard: standings, top scorers, fixtures and live results',
       'Squad Builder: line-ups and team administration',
       'Economy & sponsors: club finances and sponsorship system',
-      'AI news & rivalries: personalized feed generated with Google Gemini'
+      'AI news & rivalries: personalized feed generated with Google Gemini',
+      'Result loading by reading the match screenshot with Gemini'
     ],
     features_es: [
       'Gestión de ligas y equipos: temporadas, lobbies multijugador y salas de espera',
@@ -423,7 +630,8 @@ window.PROJECTS = [
       'Dashboard de la liga: posiciones, goleadores, fixtures y resultados en vivo',
       'Squad Builder: alineaciones y administración de tu equipo',
       'Economía y patrocinios: finanzas del club y sistema de sponsors',
-      'Noticias IA y rivalidades: feed personalizado generado con Google Gemini'
+      'Noticias IA y rivalidades: feed personalizado generado con Google Gemini',
+      'Carga de resultados leyendo la captura del partido con Gemini'
     ],
     tech: [
       { group_en: 'Frontend', group_es: 'Frontend', items: [
@@ -431,16 +639,16 @@ window.PROJECTS = [
         { icon: 'devicon-dart-plain colored', name: 'Dart' },
         { icon: 'devicon-materialui-plain colored', name: 'Material Design 3' }
       ]},
-      { group_en: 'State & Integrations', group_es: 'Estado e Integraciones', items: [
-        { icon: 'devicon-flutter-plain colored', name: 'Provider' },
-        { icon: 'devicon-flutter-plain colored', name: 'Image Picker' },
-        { icon: 'devicon-google-plain colored', name: 'Google Gemini AI' }
+      { group_en: 'Integrations', group_es: 'Integraciones', items: [
+        { icon: 'devicon-google-plain colored', name: 'Google Gemini AI' },
+        { icon: 'devicon-javascript-plain colored', name: 'Pollinations AI' },
+        { icon: 'devicon-javascript-plain colored', name: 'Cloudinary' },
+        { icon: 'devicon-flutter-plain colored', name: 'Image Picker' }
       ]},
       { group_en: 'Backend & Data', group_es: 'Backend & Datos', items: [
         { icon: 'devicon-firebase-plain colored', name: 'Firebase' },
         { icon: 'devicon-firebase-plain colored', name: 'Firestore' },
-        { icon: 'devicon-firebase-plain colored', name: 'Firebase Auth' },
-        { icon: 'devicon-firebase-plain colored', name: 'Firebase Storage' }
+        { icon: 'devicon-firebase-plain colored', name: 'Firebase Auth' }
       ]}
     ],
     // App sólo en modo oscuro: galería simple (sin selector de tema).
@@ -463,7 +671,7 @@ window.PROJECTS = [
       { img: 'celular/16-acta-ia.jpeg',        cap_en: 'AI result scan',          cap_es: 'Cargar resultado con IA' }
     ],
     contributors: [
-      { name: 'Juan Espinoza', role_en: 'Lead Developer', role_es: 'Lead Developer', github: 'JuanEspinoza8' }
+      { name: 'Juan Espinoza', role_en: 'Developer', role_es: 'Desarrollador', github: 'JuanEspinoza8' }
     ]
   },
 
@@ -474,8 +682,8 @@ window.PROJECTS = [
     title: 'AppLocker',
     tagline_en: 'Native anti-procrastination app blocker for Android.',
     tagline_es: 'Bloqueador de apps anti-procrastinación nativo para Android.',
-    status: 'Production',
-    year: '2025',
+    status: 'In use',
+    year: '2026',
     layout: 'mobile',
     accent: '#ef4444',
     cover: 'assets/images/projects/applocker/celular/01-inicio.jpeg',
@@ -484,32 +692,40 @@ window.PROJECTS = [
       demo: null
     },
     desc_en: [
-      'Anti-procrastination app blocker: it blocks specific applications during the days and time ranges you set to avoid distractions and boost your productivity. Designed with a strict focus to prevent bypasses and keep the block active no matter what.',
-      'Built natively for Android with Kotlin and Jetpack Compose, it leverages deep Android APIs — Accessibility Service and Usage Stats for precise detection, an overlay screen, auto-start on boot, and Device Administrator protection against uninstall.'
+      'Anti-procrastination app blocker: it blocks the apps you choose on the days and time ranges you set. Rules can only be changed inside a weekly edit window, so the block can\'t be turned off in a moment of weakness.',
+      'Built natively with Kotlin and Jetpack Compose. An Accessibility Service detects which app comes to the foreground, and a pure blocking policy, tested with JUnit, decides whether to cover it with a lock screen. Outside the edit window it also blocks Android Settings, and days off are requested with TOTP codes whose secret is encrypted with the Android Keystore.'
     ],
     desc_es: [
-      'Bloqueador de aplicaciones anti-procrastinación: bloquea aplicaciones específicas en los días y franjas horarias que definís para evitar distracciones y mejorar tu productividad. Diseñada con un enfoque estricto para evitar anulaciones y mantener el bloqueo activo pase lo que pase.',
-      'Construido de forma nativa para Android con Kotlin y Jetpack Compose, aprovecha APIs profundas de Android: Accessibility Service y Usage Stats para detección precisa, una pantalla de superposición (overlay), auto-inicio al encender, y protección contra desinstalación con Device Administrator.'
+      'Bloqueador de aplicaciones anti-procrastinación: bloquea las apps que elegís en los días y franjas horarias que definís. Las reglas solo se pueden cambiar dentro de una ventana de edición semanal, para que el bloqueo no se pueda desactivar en un momento de debilidad.',
+      'Construida de forma nativa con Kotlin y Jetpack Compose. Un Accessibility Service detecta qué app pasa a primer plano y una política de bloqueo pura, testeada con JUnit, decide si cubrirla con una pantalla de bloqueo. Fuera de la ventana de edición también bloquea Ajustes, y los francos se piden con códigos TOTP cuyo secreto queda cifrado con el Android Keystore.'
     ],
     features_en: [
       'Pick apps to block from the installed apps list',
-      'Strict block schedule by days and time ranges',
-      'Weekly edit window: rules can only be changed on a chosen day and time (bypass-proof)',
-      'Overlay screen that prevents the use of blocked apps',
-      'Precise usage detection via Accessibility Service and Usage Stats',
-      'Strict persistence: auto-start on boot and battery-kill protection',
+      'Block schedule by days and time ranges, which can cross midnight',
+      'Weekly edit window: rules can only be changed on a chosen day and time',
+      'Android Settings blocked outside the edit window',
+      'Full-screen lock screen (Activity) over the blocked app',
+      'Foreground app detection with an Accessibility Service, without reading screen content',
       'Anti-uninstall shield (Device Administrator)',
-      '"Day off" mode to lift the block temporarily (vacations)'
+      'Battery optimization exemption; Android restarts the service after a reboot',
+      'Day off: a one-time code from an authenticator app (TOTP) unlocks rule editing for 24 hours',
+      'Attempt limit and secret encrypted with the Android Keystore',
+      'Warning and shortcut when the accessibility service is off',
+      'Blocking and TOTP logic tested with JUnit'
     ],
     features_es: [
       'Selección de aplicaciones a bloquear desde la lista de instaladas',
-      'Horario estricto de bloqueo por días y franjas horarias',
-      'Ventana de edición semanal: las reglas solo se pueden modificar en un día y horario elegido (anti-anulación)',
-      'Pantalla de superposición (overlay) que impide el uso de apps bloqueadas',
-      'Detección precisa de uso mediante Accessibility Service y Usage Stats',
-      'Persistencia estricta: auto-inicio al encender y protección contra cierre por batería',
+      'Horario de bloqueo por días y franjas horarias, que pueden cruzar la medianoche',
+      'Ventana de edición semanal: las reglas solo se pueden modificar en un día y horario elegido',
+      'Ajustes de Android bloqueado fuera de la ventana de edición',
+      'Pantalla de bloqueo a pantalla completa (Activity) sobre la app bloqueada',
+      'Detección de la app en primer plano con un Accessibility Service, sin leer el contenido de la pantalla',
       'Escudo anti-desinstalación (Device Administrator)',
-      'Modo "franco" para levantar el bloqueo puntualmente (vacaciones)'
+      'Excepción de optimización de batería; Android vuelve a levantar el servicio al reiniciar',
+      'Franco: un código de un solo uso de una app de autenticación (TOTP) habilita la edición de las reglas durante 24 horas',
+      'Límite de intentos y secreto cifrado con Android Keystore',
+      'Aviso y acceso directo si el servicio de accesibilidad está apagado',
+      'Lógica de bloqueo y TOTP testeadas con JUnit'
     ],
     tech: [
       { group_en: 'UI & Presentation', group_es: 'UI y Presentación', items: [
@@ -520,18 +736,26 @@ window.PROJECTS = [
       ]},
       { group_en: 'State & Data', group_es: 'Estado y Datos', items: [
         { icon: 'devicon-android-plain colored', name: 'DataStore' },
-        { icon: 'devicon-kotlin-plain colored', name: 'Coroutines' }
+        { icon: 'devicon-kotlin-plain colored', name: 'Coroutines + Flow' }
       ]},
-      { group_en: 'Core Android', group_es: 'Core Android', items: [
+      { group_en: 'Core Android & Security', group_es: 'Core Android y Seguridad', items: [
         { icon: 'devicon-android-plain colored', name: 'Accessibility Service' },
         { icon: 'devicon-android-plain colored', name: 'Device Admin' },
-        { icon: 'devicon-android-plain colored', name: 'Foreground Services' }
+        { icon: 'devicon-android-plain colored', name: 'Android Keystore' },
+        { icon: 'devicon-kotlin-plain colored', name: 'TOTP (RFC 6238)' }
+      ]},
+      { group_en: 'Testing', group_es: 'Tests', items: [
+        { icon: 'devicon-junit-plain colored', name: 'JUnit' }
       ]}
     ],
     // App nativa sólo en modo oscuro: galería simple (sin selector de tema).
     gallery: [
-      { img: 'celular/01-inicio.jpeg',     cap_en: 'Home & block schedule', cap_es: 'Inicio y horario de bloqueo' },
-      { img: 'celular/02-proteccion.jpeg', cap_en: 'Protection & rules',    cap_es: 'Estado de protección' }
+      { img: 'celular/01-inicio.jpeg',       cap_en: 'Rules in effect',          cap_es: 'Reglas activas' },
+      { img: 'celular/02-proteccion.jpeg',   cap_en: 'Protection status',        cap_es: 'Estado de protección' },
+      { img: 'celular/03-bloqueo.jpeg',      cap_en: 'Blocked app',              cap_es: 'App bloqueada' },
+      { img: 'celular/04-onboarding.jpeg',   cap_en: 'Accessibility onboarding', cap_es: 'Aviso de servicio apagado' },
+      { img: 'celular/05-autenticador.jpeg', cap_en: 'Day-off authenticator',    cap_es: 'Autenticador del franco' },
+      { img: 'celular/06-franco.jpeg',       cap_en: 'Request a day off',        cap_es: 'Pedir un franco' }
     ],
     contributors: [
       { name: 'Juan Espinoza', role_en: 'Freelance Developer', role_es: 'Freelance Developer', github: 'JuanEspinoza8' }
