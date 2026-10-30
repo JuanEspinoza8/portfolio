@@ -140,7 +140,9 @@
     return map[status] || { en: status, es: status };
   }
 
-  function layoutLabel(layout) {
+  // alsoWeb: app móvil que además se puede usar desde el navegador de la PC.
+  function layoutLabel(layout, alsoWeb) {
+    if (layout === 'mobile' && alsoWeb) return { en: 'Mobile + Web', es: 'Móvil + Web' };
     return layout === 'mobile'
       ? { en: 'Mobile App', es: 'App Móvil' }
       : { en: 'Web App', es: 'App Web' };
@@ -197,7 +199,7 @@
         }).join('');
 
       const stt = statusLabel(p.status);
-      const lyt = layoutLabel(p.layout);
+      const lyt = layoutLabel(p.layout, p.alsoWeb);
 
       return '' +
         '<a href="project-details.html?project=' + p.slug + '" class="project-card" style="--accent:' + p.accent + '">' +
@@ -249,7 +251,7 @@
     root.style.setProperty('--accent', p.accent);
 
     const stt = statusLabel(p.status);
-    const lyt = layoutLabel(p.layout);
+    const lyt = layoutLabel(p.layout, p.alsoWeb);
 
     // --- Encabezado ---
     // El botón "Código Fuente" solo aparece si el proyecto tiene repo en GitHub.
@@ -317,7 +319,8 @@
           '  <button type="button" class="seg-btn" data-val="mobile"><i data-lucide="smartphone"></i><span class="en">Phone</span><span class="es">Celular</span></button>' +
           '</div>'
         : '';
-      controlsHtml = '<div class="gallery-controls">' + themeSeg + deviceSeg + '</div>';
+      // galleryThemes: false → la app no tiene modo oscuro: solo se elige el dispositivo.
+      controlsHtml = '<div class="gallery-controls">' + (p.galleryThemes === false ? '' : themeSeg) + deviceSeg + '</div>';
     }
 
     const gallery =
@@ -385,10 +388,12 @@
     function computeShots() {
       if (p.galleryModes) {
         const list = p.gallery[state.device] || [];
+        const folder = p.galleryThemes === false
+          ? (state.device === 'mobile' ? 'celular/' : 'escritorio/')
+          : state.theme + '/' + (state.device === 'mobile' ? 'celular/' : '');
         return list.map(function (g) {
           return {
-            src: 'assets/images/projects/' + p.slug + '/' + state.theme + '/' +
-                 (state.device === 'mobile' ? 'celular/' : '') + g.file,
+            src: 'assets/images/projects/' + p.slug + '/' + folder + g.file,
             cap_en: g.cap_en, cap_es: g.cap_es,
             layout: state.device === 'mobile' ? 'mobile' : 'web'
           };

@@ -235,28 +235,29 @@ window.PROJECTS = [
   {
     slug: 'snapit',
     title: 'SnapIt',
-    tagline_en: 'Citizen reports on public spaces, with verification and prioritization.',
-    tagline_es: 'Reportes ciudadanos sobre la vía pública, con verificación y priorización.',
+    tagline_en: 'Mobile app to report problems on public spaces, with a web panel to review and manage them.',
+    tagline_es: 'App móvil para reportar problemas de la vía pública, con un panel web para verlos y gestionarlos.',
     status: 'In Development',
     year: '2026',
-    layout: 'web',
+    layout: 'mobile',
+    alsoWeb: true,
     accent: '#14b8a6',
-    cover: 'assets/images/projects/snapit/escritorio/01-mapa.jpeg',
+    cover: 'assets/images/projects/snapit/celular/01-mapa.jpeg',
     links: {
       github: 'https://github.com/JuanEspinoza8/SNAPIT',
       demo: null
     },
     desc_en: [
-      'Final project of the University Technician degree in Web Development (UNCo, 2026), built by a team of three. Neighbors report problems on public spaces (potholes, broken sidewalks, curbs without ramps, streetlights out) with a photo and their location; operators of each municipal area verify the reports, group them into incidents, prioritize them and track their progress.',
-      'Monorepo with three parts: a REST API in Express + TypeScript + Prisma over PostgreSQL with PostGIS and pgRouting, a React web panel and a Flutter mobile app. Each report gets a trust score (photo metadata, location, the neighbor\'s reputation), priorities are recalculated every day, Claude (Anthropic API) helps classify photos, and the pedestrian network is imported from OpenStreetMap as the base for accessible walking routes. Every layer has its own CI job on GitHub Actions. Still in development.'
+      'Final project of the University Technician degree in Web Development (UNCo, 2026), built by a team of three. Neighbors report problems on public spaces (potholes, broken sidewalks, curbs without ramps, streetlights out) from the mobile app, with a photo and their GPS location. The map can also be browsed on the web, where operators of each municipal area verify the reports, group them into incidents, prioritize them and track their progress.',
+      'Monorepo with three parts: a REST API in Express + TypeScript + Prisma over PostgreSQL with PostGIS and pgRouting, the Flutter mobile app and a React web panel. Each report gets a trust score (photo metadata, location, the neighbor\'s reputation), priorities are recalculated every day, Claude (Anthropic API) helps classify photos, and the pedestrian network is imported from OpenStreetMap as the base for accessible walking routes. Every layer has its own CI job on GitHub Actions. Still in development.'
     ],
     desc_es: [
-      'Trabajo final de la Tecnicatura Universitaria en Desarrollo Web (UNCo, 2026), hecho en un equipo de tres. Los vecinos reportan problemas de la vía pública (pozos, veredas rotas, cordones sin rampa, luminarias apagadas) con una foto y su ubicación; los operadores de cada área municipal verifican los reportes, los agrupan en incidentes, los priorizan y siguen su avance.',
-      'Monorepo con tres partes: una API REST en Express + TypeScript + Prisma sobre PostgreSQL con PostGIS y pgRouting, un panel web en React y una app móvil en Flutter. Cada reporte tiene un nivel de confianza (metadatos de la foto, ubicación, reputación del vecino), la prioridad se recalcula todos los días, Claude (API de Anthropic) ayuda a clasificar las fotos y la red peatonal se importa de OpenStreetMap como base para los recorridos accesibles. Cada capa tiene su propio trabajo de CI en GitHub Actions. En desarrollo.'
+      'Trabajo final de la Tecnicatura Universitaria en Desarrollo Web (UNCo, 2026), hecho en un equipo de tres. Los vecinos reportan problemas de la vía pública (pozos, veredas rotas, cordones sin rampa, luminarias apagadas) desde la app móvil, con una foto y su ubicación GPS. El mapa también se puede ver desde la web, donde los operadores de cada área municipal verifican los reportes, los agrupan en incidentes, los priorizan y siguen su avance.',
+      'Monorepo con tres partes: una API REST en Express + TypeScript + Prisma sobre PostgreSQL con PostGIS y pgRouting, la app móvil en Flutter y un panel web en React. Cada reporte tiene un nivel de confianza (metadatos de la foto, ubicación, reputación del vecino), la prioridad se recalcula todos los días, Claude (API de Anthropic) ayuda a clasificar las fotos y la red peatonal se importa de OpenStreetMap como base para los recorridos accesibles. Cada capa tiene su propio trabajo de CI en GitHub Actions. En desarrollo.'
     ],
     features_en: [
-      'Report with photo, category, severity and location (web and mobile app)',
-      'Public map of incidents with filters by category, status and date',
+      'Mobile app to report with photo, category, severity and GPS location',
+      'Public incident map in the app and on the web, with filters by category, status and date',
       'Trust score for each report: photo metadata, location and neighbor reputation',
       'Review queue for operators, with AI-assisted processing (Claude)',
       'Incident workflow in the API: forward to an area, track progress, comment and recategorize',
@@ -267,8 +268,8 @@ window.PROJECTS = [
       'Tests against a real PostGIS database and CI for the API, web and app'
     ],
     features_es: [
-      'Reporte con foto, categoría, gravedad y ubicación (web y app móvil)',
-      'Mapa público de incidentes con filtros por categoría, estado y fecha',
+      'App móvil para reportar con foto, categoría, gravedad y ubicación GPS',
+      'Mapa público de incidentes en la app y en la web, con filtros por categoría, estado y fecha',
       'Nivel de confianza de cada reporte: metadatos de la foto, ubicación y reputación del vecino',
       'Bandeja de revisión para operadores, con procesamiento asistido por IA (Claude)',
       'Gestión de incidentes en la API: derivar a un área, registrar el avance, comentar y recategorizar',
@@ -310,15 +311,25 @@ window.PROJECTS = [
         { icon: 'devicon-githubactions-plain colored', name: 'GitHub Actions' }
       ]}
     ],
-    // Panel web, sin modo oscuro: galería simple. Capturas con el servidor simulado del panel (MSW).
-    gallery: [
-      { img: 'escritorio/01-mapa.jpeg',              cap_en: 'Public incident map',       cap_es: 'Mapa público de incidentes' },
-      { img: 'escritorio/02-reportar.jpeg',          cap_en: 'Report a problem',          cap_es: 'Reportar un problema' },
-      { img: 'escritorio/03-mis-reportes.jpeg',      cap_en: 'My reports',                cap_es: 'Mis reportes' },
-      { img: 'escritorio/04-revision.jpeg',          cap_en: 'Operator review queue',     cap_es: 'Revisión de reportes' },
-      { img: 'escritorio/05-revisar-reporte.jpeg',   cap_en: 'Reviewing a report',        cap_es: 'Revisar un reporte' },
-      { img: 'escritorio/06-administracion.jpeg',    cap_en: 'Operator accounts',         cap_es: 'Alta de operadores' }
-    ],
+    // App y panel sin modo oscuro: se elige solo el dispositivo (celular/ y escritorio/).
+    // Capturas con datos de ejemplo en una base aislada, no con datos reales.
+    galleryModes: true,
+    galleryThemes: false,
+    gallery: {
+      mobile: [
+        { file: '01-mapa.jpeg',            cap_en: 'Incident map',          cap_es: 'Mapa de incidentes' },
+        { file: '02-ficha.jpeg',           cap_en: 'Incident card',         cap_es: 'Ficha de un incidente' },
+        { file: '03-reportar.jpeg',        cap_en: 'Report a problem',      cap_es: 'Reportar un problema' },
+        { file: '04-mis-reportes.jpeg',    cap_en: 'My reports',            cap_es: 'Mis reportes' }
+      ],
+      desktop: [
+        { file: '01-mapa.jpeg',            cap_en: 'Public incident map',   cap_es: 'Mapa público de incidentes' },
+        { file: '02-revision.jpeg',        cap_en: 'Operator review queue', cap_es: 'Revisión de reportes' },
+        { file: '03-revisar-reporte.jpeg', cap_en: 'Reviewing a report',    cap_es: 'Revisar un reporte' },
+        { file: '04-incidentes.jpeg',      cap_en: 'Incidents',             cap_es: 'Incidentes' },
+        { file: '05-administracion.jpeg',  cap_en: 'Operator accounts',     cap_es: 'Alta de operadores' }
+      ]
+    },
     contributors: [
       { name: 'Juan Espinoza',    role_en: 'Full Stack Developer', role_es: 'Desarrollador Full Stack', github: 'JuanEspinoza8' },
       { name: 'Ezequiel Retamal', role_en: 'Backend & Web',        role_es: 'Backend y Web',            github: 'ezequiel95jr' },
@@ -331,11 +342,12 @@ window.PROJECTS = [
     slug: 'eett',
     freelance: true,
     title: 'Gestión EETT',
-    tagline_en: 'Maintenance and operations app for electrical transformer substations.',
-    tagline_es: 'App de mantenimiento y operación para estaciones transformadoras eléctricas.',
+    tagline_en: 'Mobile app for the maintenance and operations of electrical transformer substations, also usable from the PC.',
+    tagline_es: 'App móvil de mantenimiento y operación de estaciones transformadoras eléctricas, que también se usa desde la PC.',
     status: 'In Development',
     year: '2026',
     layout: 'mobile',
+    alsoWeb: true,
     accent: '#34d399',
     cover: 'assets/images/projects/eett/oscuro/celular/01-inicio.jpeg',
     links: {
@@ -392,7 +404,7 @@ window.PROJECTS = [
         { icon: 'devicon-githubactions-plain colored', name: 'GitHub Actions' }
       ]}
     ],
-    // Galería con variante de tema (claro/oscuro). App móvil: sin selector de dispositivo.
+    // Galería con variantes reales: tema (claro/oscuro) x dispositivo (celular/PC). El celular va primero.
     galleryModes: true,
     gallery: {
       mobile: [
@@ -401,6 +413,15 @@ window.PROJECTS = [
         { file: '03-alertas.jpeg',        cap_en: 'Alerts board',         cap_es: 'Tablero de alertas' },
         { file: '04-alerta.jpeg',         cap_en: 'Alert detail',         cap_es: 'Ficha de alerta' },
         { file: '05-maniobras.jpeg',      cap_en: 'Switching operations', cap_es: 'Maniobras' },
+        { file: '06-tareas.jpeg',         cap_en: 'Tasks',                cap_es: 'Tareas' },
+        { file: '07-capacitacion.jpeg',   cap_en: 'Training tutorial',    cap_es: 'Tutorial de capacitación' }
+      ],
+      desktop: [
+        { file: '01-inicio.jpeg',         cap_en: 'Home',                 cap_es: 'Inicio' },
+        { file: '02-carga-rutina.jpeg',   cap_en: 'Routine data entry',   cap_es: 'Carga de la rutina' },
+        { file: '03-alertas.jpeg',        cap_en: 'Alerts board',         cap_es: 'Tablero de alertas' },
+        { file: '04-alerta.jpeg',         cap_en: 'Alert detail',         cap_es: 'Ficha de alerta' },
+        { file: '05-maniobras.jpeg',      cap_en: 'Weekly operations',    cap_es: 'Maniobras de la semana' },
         { file: '06-tareas.jpeg',         cap_en: 'Tasks',                cap_es: 'Tareas' },
         { file: '07-capacitacion.jpeg',   cap_en: 'Training tutorial',    cap_es: 'Tutorial de capacitación' }
       ]

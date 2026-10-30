@@ -20,7 +20,9 @@ Static site in plain HTML, CSS and JavaScript, published with GitHub Pages. It i
 1. Add or edit an entry in `window.PROJECTS` inside `data/projects.js`.
 2. Put the screenshots in `assets/images/projects/<slug>/` and list them in the entry's `gallery`.
    - Projects with `galleryModes: true` use `claro/` and `oscuro/` folders, with a `celular/` subfolder for mobile screenshots.
+   - Projects with `galleryModes: true` and `galleryThemes: false` (no dark mode) use only `celular/` and `escritorio/`.
    - If an image is missing, the page shows a placeholder with the caption.
+   - `alsoWeb: true` labels a mobile app that can also be used from a PC browser ("Mobile + Web").
 3. `status` accepts `'In use'`, `'Beta'`, `'In Development'` or `'Production'`. The labels are translated in `statusLabel` (`scripts/main.js`).
 
 ## Running locally
