@@ -436,81 +436,81 @@ window.PROJECTS = [
     slug: 'otto',
     freelance: true,
     title: 'Otto — Gestor Financiero',
-    tagline_en: 'Private, offline-first personal finance manager.',
-    tagline_es: 'Gestor de finanzas personales privado y offline-first.',
+    tagline_en: 'Personal finance manager for Android, used every day by a client.',
+    tagline_es: 'Gestor de finanzas personales para Android que un cliente usa todos los días.',
     status: 'In use',
     year: '2026',
     layout: 'mobile',
     accent: '#22c55e',
     cover: 'assets/images/projects/otto/oscuro/celular/01-inicio.jpeg',
     links: {
-      github: null,
+      github: 'https://github.com/JuanEspinoza8/otto',
       demo: null
     },
     desc_en: [
-      'Cross-platform personal finance manager with an offline-first, privacy-focused architecture: your financial data is stored only on the device, with no accounts or cloud sync. Track income and expenses by category, set budgets and monthly goals, and understand your money at a glance from the dashboard.',
-      'Built with Flutter and Riverpod over a relational SQLite database, with charts (fl_chart), biometric lock (fingerprint / face), a blur privacy screen when the app goes to background, and JSON backup export/import. An AI assistant turns a typed sentence into transactions: only that sentence and your category names are sent to the AI service. Its mascot "Otto" makes saving feel friendly.'
+      'Android personal finance manager, built for a client who uses it every day. It tracks income and expenses, savings goals in pesos and in dollars, fixed expenses, installment purchases and the salary, and it has a chat ("Decile a Otto") that understands messages like "I paid 50k for electricity and 12k at the supermarket".',
+      'All the money lives in a single ledger: every transaction is a row between accounts (free pesos, dollars and one account per goal), amounts are stored in integer cents and balances come from a SQL view, so there are no stored totals to drift. One write service validates against the balance inside the same transaction, and salary, fixed expenses and installments are monthly plans that can never be applied twice. The client\'s existing database is migrated to the new schema with a check of balances, totals and installments before the commit, rolling everything back if they don\'t match. Tests cover the money type, the migration, the ledger, the plans, the backup and the lock.',
+      'Data is stored in SQLite on the phone and excluded from Google backups. The AI is optional: when it\'s on, the chat sends the message text and the category names, and the monthly summary sends the totals, to Pollinations through a Cloudflare Worker that keeps the API key out of the app. It can be turned off in the settings, and the chat then uses a local parser.'
     ],
     desc_es: [
-      'Gestor de finanzas personales multiplataforma con una arquitectura offline-first y enfocada en la privacidad: tus datos financieros se guardan solo en el dispositivo, sin cuentas ni sincronización en la nube. Registra ingresos y gastos por categoría, define presupuestos y metas mensuales, y entiende tu plata de un vistazo desde el panel de control.',
-      'Construido con Flutter y Riverpod sobre una base de datos relacional SQLite, con gráficos (fl_chart), bloqueo biométrico (huella / rostro), pantalla de privacidad con desenfoque al pasar a segundo plano, y exportación/importación de backups en JSON. Un asistente con IA convierte una frase escrita en movimientos: solo se envían esa frase y los nombres de tus categorías al servicio de IA. Su mascota "Otto" hace del ahorro algo más amigable.'
+      'Gestor de finanzas personales para Android, hecho para un cliente que lo usa todos los días. Registra gastos e ingresos, metas de ahorro en pesos y en dólares, gastos fijos, compras en cuotas y el sueldo, y tiene un chat ("Decile a Otto") que entiende mensajes como "pagué 50 lucas de luz y el super 12 mil".',
+      'Toda la plata vive en un libro único: cada movimiento es una fila entre cuentas (pesos libres, dólares y una cuenta por meta), los montos se guardan en centavos enteros y los saldos salen de una vista SQL, así que no hay totales guardados que se desincronicen. Un solo servicio de escritura valida contra el saldo dentro de la misma transacción, y el sueldo, los fijos y las cuotas son planes mensuales que no se pueden aplicar dos veces. La base que ya tenía el cliente se migra al esquema nuevo comparando saldos, totales y cuotas antes del commit, y si algo no cierra se revierte todo. Hay tests del tipo de dinero, la migración, el libro, los planes, el respaldo y el bloqueo.',
+      'Los datos se guardan en SQLite en el teléfono y no van al backup de Google. La IA es opcional: cuando está activa, el chat envía el texto del mensaje y los nombres de las categorías, y el resumen del mes envía los totales, a Pollinations a través de un Cloudflare Worker que guarda la clave fuera de la app. Se puede apagar en los ajustes, y entonces el chat usa un parser local.'
     ],
     features_en: [
-      'Dashboard with dynamic balance, donut chart and recent history',
-      'Income/expense transactions with full CRUD',
-      'Categories with icon, color and budget limits',
-      'Budget alerts (yellow at 80%, red at 100%)',
-      'Recurring transactions module',
-      'Savings goals with the "Otto" mascot',
-      'AI assistant that turns a typed sentence into transactions',
-      'Biometric lock + blur privacy screen in background',
-      'JSON backup export/import (stored locally, no cloud)',
-      'Light/Dark theme and local notifications'
+      'Available money in pesos, with dollars shown apart at the blue-market rate',
+      'Savings goals in pesos or dollars: add, withdraw and move between goals',
+      'Salary, fixed expenses and installments as monthly plans to confirm, never duplicated',
+      'Category budgets with a yellow alert at 80% and a red one at 100%',
+      'Chat that registers several transactions per message, with AI or a local parser',
+      'Monthly summary with feedback from Otto',
+      'Single ledger with amounts in cents and balances computed in SQL',
+      'Verified migration of the client\'s database, with automatic rollback',
+      'Fingerprint or PIN lock that also hides the app in recents and screenshots',
+      'JSON backup, daily reminders and light/dark mode'
     ],
     features_es: [
-      'Panel con balance dinámico, gráfico de dona e historial reciente',
-      'Movimientos de ingreso/gasto con CRUD completo',
-      'Categorías con ícono, color y límites de presupuesto',
-      'Alertas de presupuesto (amarillo 80%, rojo 100%)',
-      'Módulo de movimientos recurrentes',
-      'Metas de ahorro con la mascota "Otto"',
-      'Asistente con IA que convierte una frase escrita en movimientos',
-      'Bloqueo biométrico + pantalla de privacidad al minimizar',
-      'Exportación/importación de backups en JSON (guardados en el dispositivo, sin nube)',
-      'Tema Claro/Oscuro y notificaciones locales'
+      'Disponible en pesos, con los dólares aparte estimados al blue',
+      'Metas de ahorro en pesos o en dólares: aportar, retirar y mover entre metas',
+      'Sueldo, fijos y cuotas como planes mensuales para confirmar, sin duplicarse',
+      'Presupuestos por categoría con alerta amarilla al 80% y roja al 100%',
+      'Chat que registra varios movimientos por mensaje, con IA o con un parser local',
+      'Resumen del mes con una devolución de Otto',
+      'Libro único con montos en centavos y saldos calculados en SQL',
+      'Migración verificada de la base del cliente, con rollback automático',
+      'Bloqueo con huella o PIN que además oculta la app en recientes y capturas',
+      'Respaldo en JSON, recordatorios diarios y modo claro/oscuro'
     ],
     tech: [
       { group_en: 'Mobile', group_es: 'Mobile', items: [
         { icon: 'devicon-flutter-plain colored', name: 'Flutter' },
         { icon: 'devicon-dart-plain colored', name: 'Dart' },
-        { icon: 'devicon-materialui-plain colored', name: 'Material 3' }
+        { icon: 'devicon-android-plain colored', name: 'Android' }
       ]},
       { group_en: 'State & Data', group_es: 'Estado y Datos', items: [
         { icon: 'devicon-flutter-plain colored', name: 'Riverpod' },
         { icon: 'devicon-sqlite-plain colored', name: 'SQLite (sqflite)' },
         { icon: 'devicon-flutter-plain colored', name: 'fl_chart' }
       ]},
-      { group_en: 'Device, Security & AI', group_es: 'Dispositivo, Seguridad e IA', items: [
-        { icon: 'devicon-android-plain colored', name: 'local_auth (Biometría)' },
+      { group_en: 'Security & AI', group_es: 'Seguridad e IA', items: [
+        { icon: 'devicon-android-plain colored', name: 'local_auth' },
         { icon: 'devicon-android-plain colored', name: 'Local Notifications' },
-        { icon: 'devicon-flutter-plain colored', name: 'share_plus / file_picker' },
-        { icon: 'devicon-flutter-plain colored', name: 'Pollinations AI (http)' }
+        { icon: 'devicon-cloudflareworkers-plain colored', name: 'Cloudflare Workers' },
+        { icon: 'devicon-flutter-plain colored', name: 'Pollinations AI' }
       ]}
     ],
     // Galería con variante de tema (claro/oscuro). App móvil: sin selector de dispositivo.
     galleryModes: true,
     gallery: {
       mobile: [
-        { file: '01-inicio.jpeg',             cap_en: 'Dashboard',            cap_es: 'Panel de control' },
-        { file: '02-metas.jpeg',              cap_en: 'Savings goals',        cap_es: 'Metas de ahorro' },
-        { file: '03-graficos.jpeg',           cap_en: 'Charts & AI assistant',cap_es: 'Gráficos y asistente IA' },
-        { file: '04-estadisticas.jpeg',       cap_en: 'Statistics',           cap_es: 'Estadísticas' },
-        { file: '05-registrar-gasto.jpeg',    cap_en: 'New expense',          cap_es: 'Registrar gasto' },
-        { file: '06-registrar-ingreso.jpeg',  cap_en: 'New income',           cap_es: 'Registrar ingreso' },
-        { file: '07-registrar-ahorro.jpeg',   cap_en: 'Add to savings',       cap_es: 'Registrar ahorro' },
-        { file: '08-fijos.jpeg',              cap_en: 'Fixed expenses',       cap_es: 'Gastos fijos' },
-        { file: '09-cuotas.jpeg',             cap_en: 'Installments',         cap_es: 'Cuotas' },
-        { file: '10-configuracion.jpeg',      cap_en: 'Settings & security',  cap_es: 'Ajustes y seguridad' }
+        { file: '01-inicio.jpeg',         cap_en: 'Dashboard',            cap_es: 'Inicio' },
+        { file: '02-metas.jpeg',          cap_en: 'Savings goals',        cap_es: 'Metas de ahorro' },
+        { file: '03-registrar.jpeg',      cap_en: 'New expense',          cap_es: 'Registrar gasto' },
+        { file: '04-chat.jpeg',           cap_en: 'Chat with Otto',       cap_es: 'Chat con Otto' },
+        { file: '05-fijos.jpeg',          cap_en: 'Fixed expenses',       cap_es: 'Gastos fijos' },
+        { file: '06-cuotas.jpeg',         cap_en: 'Installments',         cap_es: 'Cuotas' },
+        { file: '07-presupuestos.jpeg',   cap_en: 'Category budgets',     cap_es: 'Presupuestos por categoría' },
+        { file: '08-configuracion.jpeg',  cap_en: 'Settings & privacy',   cap_es: 'Ajustes y privacidad' }
       ]
     },
     contributors: [

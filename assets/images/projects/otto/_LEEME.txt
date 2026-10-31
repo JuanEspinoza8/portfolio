@@ -1,18 +1,17 @@
-OTTO — capturas REALES con variante de tema (ya cargadas)
+OTTO — capturas con variante de tema (ya cargadas)
 
 Otto es app móvil, así que sólo hay selector Claro/Oscuro (sin PC/Celular).
+Las capturas usan datos inventados (la base de prueba de los tests del repo).
 Estructura:
   claro/celular/    -> capturas modo claro   (.jpeg, verticales)
   oscuro/celular/   -> capturas modo oscuro   (.jpeg, verticales)
 
 Pantallas (mismo nombre en claro y oscuro):
-  01-inicio.jpeg              -> Panel de control
-  02-metas.jpeg              -> Metas de ahorro
-  03-graficos.jpeg           -> Gráficos + asistente IA
-  04-estadisticas.jpeg       -> Estadísticas
-  05-registrar-gasto.jpeg    -> Registrar gasto
-  06-registrar-ingreso.jpeg  -> Registrar ingreso
-  07-registrar-ahorro.jpeg   -> Registrar ahorro
-  08-fijos.jpeg              -> Gastos fijos
-  09-cuotas.jpeg             -> Cuotas
-  10-configuracion.jpeg      -> Ajustes y seguridad
+  01-inicio.jpeg          -> Inicio
+  02-metas.jpeg           -> Metas de ahorro
+  03-registrar.jpeg       -> Registrar gasto
+  04-chat.jpeg            -> Chat con Otto
+  05-fijos.jpeg           -> Gastos fijos
+  06-cuotas.jpeg          -> Cuotas
+  07-presupuestos.jpeg    -> Presupuestos por categoría
+  08-configuracion.jpeg   -> Ajustes y privacidad
